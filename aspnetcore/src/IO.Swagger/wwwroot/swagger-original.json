@@ -1,0 +1,518 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "Сервис задач и уведомлений",
+    "description" : "API сервиса для получения и создания задач и отправки уведомлений",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3003/api/task"
+  } ],
+  "paths" : {
+    "/assigneebySN" : {
+      "get" : {
+        "summary" : "Поиск всех задач, назначенные на указанного пользователя, по табельному номеру или ФИО",
+        "description" : "Поиск всех задач, назначенные на указанного пользователя, по табельному номеру или ФИО",
+        "operationId" : "getTaskBySN",
+        "parameters" : [ {
+          "name" : "serviceNumber",
+          "in" : "query",
+          "description" : "Табельный номер",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "code",
+          "in" : "query",
+          "description" : "Код подразделения",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "firstName",
+          "in" : "query",
+          "description" : "Имя",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastName",
+          "in" : "query",
+          "description" : "Фамилия",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "middleName",
+          "in" : "query",
+          "description" : "Отчество",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "Смещение",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список получен успешно",
+            "content" : {
+              "application/json" : {
+                "example" : [ {
+                  "id" : 673,
+                  "name" : "taskforStepan",
+                  "planStartDate" : "2020-10-23T09:56:24.258Z",
+                  "planEndDate" : "2020-10-30T00:00:00.000Z"
+                }, {
+                  "id" : 672,
+                  "name" : "hello",
+                  "planStartDate" : "2020-11-17T10:03:19.846Z",
+                  "planEndDate" : "2020-11-24T00:00:00.000Z"
+                }, {
+                  "id" : 671,
+                  "name" : "taskforStepan",
+                  "planStartDate" : "2020-10-23T09:56:24.258Z",
+                  "planEndDate" : "2020-10-30T00:00:00.000Z"
+                }, {
+                  "id" : 670,
+                  "name" : "Here we go again"
+                }, {
+                  "id" : 667,
+                  "name" : "taskforStepan",
+                  "planStartDate" : "2020-10-23T09:56:24.258Z",
+                  "planEndDate" : "2020-10-30T00:00:00.000Z"
+                }, {
+                  "id" : 666,
+                  "name" : "taskforStepan",
+                  "planStartDate" : "2020-10-23T09:56:24.258Z",
+                  "planEndDate" : "2020-10-30T00:00:00.000Z"
+                }, {
+                  "id" : 663,
+                  "name" : "taskforStepan",
+                  "planStartDate" : "2020-10-23T09:56:24.258Z",
+                  "planEndDate" : "2020-10-30T00:00:00.000Z"
+                } ]
+              }
+            }
+          },
+          "404" : {
+            "description" : " * Сотрудника с данным табельным номером и кодом подразделения не сущестует\n* Не удалось однозначно идентифицировать сотрудника\n* Для пользователя с данным userId не найдено задач "
+          }
+        }
+      }
+    },
+    "/appointee" : {
+      "get" : {
+        "summary" : "Поиск всех задач, назначенные данным пользователем, по табельному номеру или ФИО",
+        "description" : "Поиск всех задач, назначенные данным пользователем, по табельному номеру или ФИО",
+        "operationId" : "getappointedTask",
+        "parameters" : [ {
+          "name" : "serviceNumber",
+          "in" : "query",
+          "description" : "Табельный номер",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "code",
+          "in" : "query",
+          "description" : "Код подразделения",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "firstName",
+          "in" : "query",
+          "description" : "Имя",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "lastName",
+          "in" : "query",
+          "description" : "Фамилия",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "middleName",
+          "in" : "query",
+          "description" : "Отчество",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "Смещение",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список получен успешно",
+            "content" : {
+              "application/json" : {
+                "example" : [ {
+                  "id" : 685,
+                  "task" : {
+                    "id" : 663,
+                    "name" : "taskforStepan",
+                    "appointeeId" : 768
+                  }
+                }, {
+                  "id" : 668,
+                  "task" : {
+                    "id" : 645,
+                    "name" : "TestTask stepan",
+                    "appointeeId" : 768,
+                    "content" : "1"
+                  }
+                }, {
+                  "id" : 684,
+                  "task" : {
+                    "id" : 662,
+                    "name" : "task",
+                    "appointeeId" : 768
+                  }
+                } ]
+              }
+            }
+          },
+          "404" : {
+            "description" : " * Сотрудника с данным табельным номером и кодом подразделения не сущестует\n* Сотрудник с данным табельным номером и кодом подразделения не является пользователем нашей системы\n* Сотрудника с данным именем не существует\n* Сотрудник с данным ФИО не является пользователем нашей системы"
+          }
+        }
+      }
+    },
+    "/list" : {
+      "get" : {
+        "summary" : "Список всех задач с заданными количеством(limit) и смещением(offset)",
+        "description" : "Список всех задач с заданными количеством(limit) и смещением(offset)",
+        "operationId" : "getTasks",
+        "parameters" : [ {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "offset",
+          "in" : "query",
+          "description" : "Смещение",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список получен успешно",
+            "content" : {
+              "application/json" : {
+                "example" : [ {
+                  "id" : 297,
+                  "name" : "Оформление документации ",
+                  "planStartDate" : "2020-06-17T06:46:34.464Z",
+                  "planEndDate" : "2020-06-30T00:00:00.000Z"
+                }, {
+                  "id" : 298,
+                  "name" : "Документ 22",
+                  "planStartDate" : "2020-06-17T06:48:22.834Z",
+                  "planEndDate" : "2020-06-30T00:00:00.000Z"
+                } ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id" : {
+      "get" : {
+        "summary" : "Поиск по ID задачи",
+        "description" : "Поиск по ID задачи",
+        "operationId" : "getTaskById",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "query",
+          "description" : "ID задачи",
+          "required" : false,
+          "style" : "form",
+          "explode" : true,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Задача найдена",
+            "content" : {
+              "application/json" : {
+                "example" : [ {
+                  "id" : 645,
+                  "name" : "TestTask stepan",
+                  "planStartDate" : "2020-10-29T14:46:21.219Z",
+                  "planEndDate" : "2020-10-29T14:46:23.074Z",
+                  "content" : "1",
+                  "assignees" : [ {
+                    "userId" : 768,
+                    "user" : {
+                      "id" : 768,
+                      "lastName" : "Петров",
+                      "firstName" : "Степан",
+                      "middleName" : "Денисович",
+                      "official" : {
+                        "position" : "1"
+                      }
+                    }
+                  } ],
+                  "appointee" : {
+                    "id" : 768,
+                    "lastName" : "Петров",
+                    "firstName" : "Степан",
+                    "middleName" : "Денисович",
+                    "official" : {
+                      "position" : "1"
+                    }
+                  }
+                } ]
+              }
+            }
+          },
+          "404" : {
+            "description" : "  * Задача с указанным id не найдена"
+          }
+        }
+      }
+    },
+    "/" : {
+      "post" : {
+        "summary" : "Создание задачи на пользователя",
+        "description" : "Создание задачи на пользователя",
+        "operationId" : "postTask",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/post"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Задача создана",
+            "content" : {
+              "application/json" : {
+                "example" : [ {
+                  "id" : 685,
+                  "task" : {
+                    "id" : 663,
+                    "name" : "taskforStepan",
+                    "appointeeId" : 768
+                  }
+                }, {
+                  "id" : 668,
+                  "task" : {
+                    "id" : 645,
+                    "name" : "TestTask stepan",
+                    "appointeeId" : 768,
+                    "content" : "1"
+                  }
+                }, {
+                  "id" : 684,
+                  "task" : {
+                    "id" : 662,
+                    "name" : "task",
+                    "appointeeId" : 768
+                  }
+                } ]
+              }
+            }
+          },
+          "404" : {
+            "description" : "  * Не передан userId\n* Не существует пользователя с указанным userId"
+          }
+        }
+      }
+    },
+    "/notify" : {
+      "post" : {
+        "summary" : "Отправка уведомления сотруднику",
+        "description" : "Отправка уведомления сотруднику",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/notify"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Уведомление отправлено успешно"
+          },
+          "404" : {
+            "description" : " * Сотрудника с данным табельным номером и userId не сущестует\n* Не удалось однозначно идентифицировать сотрудника\n* Сотрудник с данным табельным номером и userId не является пользователем нашей системы "
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "assignees" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/assignees_inner"
+        }
+      },
+      "statuses" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/statuses_inner"
+        }
+      },
+      "post" : {
+        "required" : [ "actionTypeId", "assignees", "name", "statuses" ],
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "assignees" : {
+            "$ref" : "#/components/schemas/assignees"
+          },
+          "actionTypeId" : {
+            "type" : "integer"
+          },
+          "statuses" : {
+            "$ref" : "#/components/schemas/statuses"
+          },
+          "report" : {
+            "type" : "string"
+          },
+          "content" : {
+            "type" : "string"
+          },
+          "comment" : {
+            "type" : "string"
+          }
+        }
+      },
+      "notify" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string"
+          },
+          "link" : {
+            "type" : "string"
+          },
+          "text" : {
+            "type" : "string"
+          },
+          "serviceNumber" : {
+            "type" : "string"
+          },
+          "code" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "integer"
+          }
+        }
+      },
+      "assignees_inner" : {
+        "required" : [ "appointedOn", "userId" ],
+        "properties" : {
+          "userId" : {
+            "type" : "integer"
+          },
+          "appointedOn" : {
+            "type" : "string"
+          }
+        }
+      },
+      "statuses_inner" : {
+        "required" : [ "statusId", "userId" ],
+        "properties" : {
+          "userId" : {
+            "type" : "integer"
+          },
+          "statusId" : {
+            "type" : "integer"
+          }
+        }
+      }
+    }
+  }
+}
